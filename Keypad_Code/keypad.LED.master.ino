@@ -24,12 +24,17 @@
 /*
  * WIRE: define 
  */
-#define PAYLOAD_SIZE 2 // how many bytes to expect from each I2C salve node
+   ///////////////////// ADDED INFO ////////////////////////
+#define PAYLOAD_SIZE 2 // how many bytes to expect from each I2C slave node
+ // Payload size is how many bytes to read from the bus (mass of wires)
 #define NODE_MAX 2 // maximum number of slave nodes (I2C addresses) to probe
+ //Defining there are two slaves to look for information from
 #define START_NODE 1 // The starting I2C address of slave nodes
+ //
 #define NODE_READ_DELAY 1000 // Some delay between I2C node reads
 int nodePayload[PAYLOAD_SIZE];
-
+   ///////////////////// ADDED INFO ////////////////////////
+ // int array of size 2 (because of payload size) ex [ int , int ]
 
 /*
  * LED: notes
@@ -60,6 +65,10 @@ void setup() {
    */
   while(!Serial); // Waits for Serial to begin
   for(int i = 0; i < sizeof(strips) / sizeof(*strips); i++)
+   ///////////////////// ADDED INFO ////////////////////////
+   //sizeof(strips) is the size in bytes (memory) of strips 
+   //*strips is the "value pointed to by" strips
+   //end result of sizeof(strips) / sizeof(*strips) is number of elements in the array called strips
   {
     strips[i].begin();
     strips[i].setBrightness(60); // Brightness goes from 0 (off) to 255(max brightness).
